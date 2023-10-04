@@ -1,12 +1,11 @@
 package com.example.userresoucemanagement.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.*;
 
 
 import jakarta.persistence.*;
@@ -30,11 +29,12 @@ public class Resource {
     @Column(name = "resource_name")
     private String resourceName;
 
-    @ManyToMany(mappedBy = "resources",cascade = CascadeType.ALL)
-    @JsonIgnore
+//    @ToString.Exclude
+    @ManyToMany(mappedBy = "resources")
+//    @JsonManagedReference
     private List<Project> projects = new ArrayList<>();
 
-    @OneToMany(mappedBy = "resource", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ResourceDetails> resourceDetails = new ArrayList<>();
+    @OneToOne(mappedBy = "resource",cascade = CascadeType.ALL)
+    private ResourceDetails resourceDetails;
 
 }

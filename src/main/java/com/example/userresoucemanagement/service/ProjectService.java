@@ -18,7 +18,9 @@ import java.util.List;
     public List<Project> getAllProjects() {
         return projectRepository.findAll();
     }
-
+    public List<Project> getProjectsForUser(String userName) {
+        return projectRepository.findByUserUserName(userName);
+    }
     public Project getProjectById(Long id) {
         return projectRepository.findById(id).orElse(null);
     }

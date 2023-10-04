@@ -22,8 +22,8 @@ import java.util.List;
         return resourceRepository.findById(id).orElse(null);
     }
 
-    public void addResource(Resource resource) {
-        resourceRepository.save(resource);
+    public Resource addResource(Resource resource) {
+        return resourceRepository.save(resource);
     }
 
     public void deleteResource(Long id) {

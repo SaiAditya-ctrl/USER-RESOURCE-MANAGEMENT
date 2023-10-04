@@ -2,12 +2,12 @@ package com.example.userresoucemanagement.entity;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 //import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -23,6 +23,7 @@ import java.util.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+
 public class User {
     public enum Role {
         USER, ADMIN
@@ -43,12 +44,8 @@ public class User {
     private Date createDate;
 
 
-    @ManyToMany(fetch =FetchType.LAZY ,cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "UserProjects",
-            joinColumns = @JoinColumn(name = "user_name"),
-            inverseJoinColumns = @JoinColumn(name = "project_id")
-    )
+//    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+//    private List<Project> projects = new ArrayList<>();
 
-    private List<Project> projects = new ArrayList<>();
+
 }

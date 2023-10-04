@@ -1,10 +1,8 @@
 package com.example.userresoucemanagement.entity;
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.*;
 
 
 import jakarta.persistence.*;
@@ -30,15 +28,23 @@ public class Project {
     @Column(name = "create_date")
     private Date createDate;
 
-    @ManyToMany(mappedBy = "projects",cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<User> users = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "user_name_fk", referencedColumnName = "user_name")
 
-   @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+//    @JsonBackReference
+    private User user;
+
+
+
+
+//    @ToString.Exclude
+    @JsonIgnore
+   @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "ProjectResources",
-            joinColumns = @JoinColumn(name = "project_id"),
-            inverseJoinColumns = @JoinColumn(name = "resource_id")
+            joinColumns = @JoinColumn(name = "project_id",referencedColumnName = "project_id"),
+            inverseJoinColumns = @JoinColumn(name = "resource_id",referencedColumnName = "resource_id")
     )
-    private List<Resource> resources = new ArrayList<>();
+private List<Resource> resources = new ArrayList<>();
+//}
 }

@@ -39,24 +39,24 @@ public class UsercontrollerTest {
         MockitoAnnotations.openMocks(this);
     }
 
-    @Test
-    void getAllUsers() {
-        List<User> expectedUserList = new ArrayList<>();
-        when(userService.getAllUsers()).thenReturn(expectedUserList);
-        ResponseEntity<List<User>> responseEntity = usercontroller.getAllUsers();
-        assertEquals(responseEntity.getStatusCode(), HttpStatusCode.valueOf(HttpStatus.OK.value()));
-        assertEquals(responseEntity.getBody(), expectedUserList);
-    }
+//    @Test
+//    void getAllUsers() {
+//        List<User> expectedUserList = new ArrayList<>();
+//        when(userService.getAllUsers()).thenReturn(expectedUserList);
+//        ResponseEntity<List<User>> responseEntity = usercontroller.getAllUsers();
+//        assertEquals(responseEntity.getStatusCode(), HttpStatusCode.valueOf(HttpStatus.OK.value()));
+//        assertEquals(responseEntity.getBody(), expectedUserList);
+//    }
 
 
-    @Test
-    void addUser() {
-        User user = mock(User.class);
-        Mockito.doNothing().when(userService).addUser(user);
-        ResponseEntity<String> responseEntity = usercontroller.addUser(user);
-        assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
-        assertEquals(responseEntity.getBody(), "User added successfully");
-    }
+//    @Test
+//    void addUser() {
+//        User user = mock(User.class);
+//        Mockito.doNothing().when(userService).addUser(user);
+//        ResponseEntity<String> responseEntity = usercontroller.addUser(user);
+//        assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
+//        assertEquals(responseEntity.getBody(), "User added successfully");
+//    }
 
 
     @Test

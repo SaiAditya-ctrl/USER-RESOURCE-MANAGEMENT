@@ -1,15 +1,24 @@
 package com.example.userresoucemanagement.entity;
 
 
-
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Formula {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
 
     private String formulaName;
@@ -19,7 +28,8 @@ public class Formula {
     private Boolean edited;
 
     @ManyToOne
-    @JoinColumn(name = "resource_description_id")
-    private ResourceDetails resourceDescription;
+    @JoinColumn(name = "resourceDetails_id",referencedColumnName = "id")
+    private ResourceDetails resourceDetails;
+
 
 }

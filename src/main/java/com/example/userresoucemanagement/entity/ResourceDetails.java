@@ -1,6 +1,8 @@
 package com.example.userresoucemanagement.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,8 +10,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 
 @Entity
 @Data
@@ -19,7 +23,8 @@ import java.util.List;
 public class ResourceDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+ @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     private String resourceName;
@@ -33,16 +38,24 @@ public class ResourceDetails {
     private Date modifiedDate;
 
     private Double resourceCost;
-
-    // Establishing the many-to-one relationship with Resource
-    @ManyToOne
-    @JoinColumn(name = "resource_id")
+@JsonIgnore
+    @OneToOne
+    @JoinColumn(name = "resource_id",referencedColumnName = "resource_id")
     private Resource resource;
+//
 
-    @OneToMany(mappedBy = "resourceDescription")
-    private List<Formula> formulas;
-
-
-
-    // Getters and setters (omitted for brevity)
+//    @OneToMany(mappedBy = "resourceDetails", cascade = CascadeType.ALL)
+//    private List<Formula> formulas = new ArrayList<>();
+////
+//
+//   public void addFormula(Formula formula) {
+//      formulas.add(formula);
+//      formula.setResourceDetails(this);
+//
+//   }
+//
+//   public void removeFormula(Formula formula) {
+//      formulas.remove(formula);
+//      formula.setResourceDetails(null);
+//   }
 }
